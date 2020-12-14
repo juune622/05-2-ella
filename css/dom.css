@@ -1,0 +1,13 @@
+.wrapper{max-width: 1200px;margin: auto;display: flex;flex-wrap: wrap;}
+.wrapper .box{border: 1px solid #333;width: 10px;height: 10px;background-color: red;margin-right: -1px;margin-top: -1px;transition: all 0.2s;}
+.wrapper .box.red{background-color: red;}
+.wrapper .box.orange{background-color: orange;}
+.wrapper .box.green{background-color: green;}
+.wrapper .box.blue{background-color: blue;}
+.wrapper .box.pink{background-color: darkmagenta;}
+.wrapper .box.deepskyblue{background-color: deepskyblue;}
+.wrapper .box.darkseagreen{background-color: darkseagreen;}
+.wrapper .box.fuchsia{background-color: fuchsia;}
+.wrapper .box.navy{background-color: navy;}
+.wrapper .box.saddlebrown{background-color: saddlebrown;}
+.wrapper .box:hover{background: khaki;}

@@ -1,0 +1,60 @@
+.wrapper {
+  max-width: 575px;
+  margin: auto;
+}
+
+.wrapper .title {
+  margin: 1em 0;
+  border-bottom: 1px solid rgb(25, 89, 110);
+  color: rgb(47, 182, 228);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.result-wrapper {
+  display: flex;
+}
+
+.result-wrapper .result-wrap {
+  width: 80%;
+  border: 2px solid deepskyblue;
+  border-radius: 8px;
+  margin-right: 0.5em;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.result-wrapper .number {
+  width: 2em;
+  height: 2em;
+  font-size: 1.5em;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 0.25em;
+  line-height: 1.875em;
+  text-shadow: 0 0 0.325em rgba(0, 0, 0, 0.7);
+}
+
+.result-wrapper .number.yellow {
+  background-color: yellow;
+}
+
+.result-wrapper .number.blue {
+  background-color: lightskyblue;
+}
+
+.result-wrapper .number.red {
+  background-color: red;
+}
+
+.result-wrapper .number.grey {
+  background-color: lightslategray;
+}
+
+.result-wrapper .number.green {
+  background-color: greenyellow;
+}
