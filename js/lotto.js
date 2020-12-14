@@ -9,7 +9,7 @@ function onLucky() {
     lotto.push(numBers)
 
 
-    for (var i=0;i<=5;i++){
+   
       $('.result-wrap').empty();
     $('.result-wrap').append('<div class="number yellow">' + lotto[0] + '</div>',
       '<div class="number red">' + lotto[1] + '</div>',
@@ -17,7 +17,7 @@ function onLucky() {
       '<div class="number blue">' + lotto[3] + '</div>',
       '<div class="number green">' + lotto[4] + '</div>',
       '<div class="number green">' + lotto[5] + '</div>'
-    )}
+    )
 
 
 
