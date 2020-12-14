@@ -15,7 +15,8 @@ function onCreateBox() {
   var cnt = Number($('input[name="cnt"]').val());
   for (var i = 0; i < cnt; i++) {
     color = Math.floor(Math.random() * 10);
-    $('.wrapper').append("<div class='box "+colors[color]+"'></div>")
+  
+    $('.wrapper').append("<div class='number"+colors[color]+"'></div>")
   }
 }
 
