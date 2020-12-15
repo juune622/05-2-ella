@@ -1,0 +1,80 @@
+[{
+    "id":1,
+    "title":"MARC",
+    "summary":"Dinterdum Pretium De Condimentus",
+    "price":"$199.00",
+    "src": "../img/product-clothes-1_b56c14fa-5538-46c0-bde3-5c6e01617a6d_large.jpg",
+    "star":4.7
+},
+{
+    "id":2,
+    "title":"G-STAR",
+    "summary":"Dinterdum Pretium De Condimentus",
+    "price":"$169.00",
+    "src": "../img/product-clothes-12_e0fc0985-0f1b-4f08-a37c-c471b512c733_large.jpg",
+    "star":3.8
+},
+{
+    "id":3,
+    "title":"CHANEL",
+    "summary":"Dinterdum Pretium De Condimentus",
+    "price":"$399.00",
+    "src": "../img/product-clothes-15_ccda53b5-213e-4168-82fd-6d02c77dac26_large.jpg",
+    "star":4.3
+},
+{
+    "id":4,
+    "title":"BURBERRY",
+    "summary":"Dinterdum Pretium De Condimentus",
+    "price":"$599.00",
+    "src": "../img/product-clothes-21-min_95862a3f-9c9d-4d01-a396-2036629bfa89_large.jpg",
+    "star":2.8
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

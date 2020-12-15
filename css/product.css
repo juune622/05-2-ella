@@ -1,0 +1,9 @@
+.wrapper{max-width: 1200px; margin: auto;display: flex;justify-content: space-between;}
+.wrapper .product-wrap{width: 24%;margin-top: 2em;}
+.wrapper .product-wrap .img-wrap{}
+.wrapper .product-wrap .img-wrap img{width: 100%;}
+.wrapper .product-wrap .info-wrap .title{font-weight: bold;margin: 3%;display: flex;justify-content: space-between;}
+.wrapper .product-wrap .info-wrap .summary{margin: 3%;}
+.wrapper .product-wrap .info-wrap .price{margin: 3%;}
+
+.wrapper .product-wrap .info-wrap .star{color: rgb(167, 167, 75);}
