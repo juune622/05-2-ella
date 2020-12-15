@@ -23,9 +23,8 @@ function onProduct(r){
         html += '<div class="title">'+r[i].title+'<i class="far fa-heart"></i></div>'
         html += '<div class="summary">'+r[i].summary+'</div>'
         html += '<div class="price">'+r[i].price+'</div>'
-        html += '<div class="star-wrap">'+genStar(r[i].star)+'</div>'
+        html += '<div class="star-wrap">''</div>'
         html += '</div>'
-        html += '</i>'
     }
     $(".wrapper").append(html);
 }
