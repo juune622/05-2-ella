@@ -13,39 +13,47 @@ $.get('../json/new-products.json', onNewProducts); //Newrelease
 
 //이벤트콜백
 function onNewProducts(r) {
-	console.log(r);
-	for(var i=0, html=''; i<r.length; i++) {
-		html  = '<div class="slide">';
+
+	for (var i = 0, html = ''; i < r.length; i++) {
+		html = '<div class="slide swiper-slide">';
 		html += '<div class="img-wrap">';
-		html += '<img src="'+r[i].src+'" alt="상품" class="w-100">';
+		html += '<img src="' + r[i].src + '" alt="상품" class="w-100">';
 		html += '</div>';
 		html += '<div class="content-wrap">';
-		html += '<h4 class="title">'+r[i].title+'</h4>';
-		html += '<p class="summary">'+r[i].summary+'</p>';
+		html += '<h4 class="title">' + r[i].title + '</h4>';
+		html += '<p class="summary">' + r[i].summary + '</p>';
 		html += '<div class="star">';
-		for(var j=0; j<5; j++) html += '<i class="fa fa-star"></i>';
-		if(Number(r[i].star) > 0) html += '<div class="mask"></div>';
+		for (var j = 0; j < 5; j++) html += '<i class="fa fa-star"></i>';
+		if (Number(r[i].star) > 0) html += '<div class="mask"></div>';
 		html += '</div>';
 		html += '<div class="content">';
-		html += '<span class="price-original">$'+r[i].originalPrice+'</span>';
+		html += '<span class="price-original">$' + r[i].originalPrice + '</span>';
 		html += '<span> | </span>';
-		html += '<span class="origin">'+r[i].origin+'</span>';
+		html += '<span class="origin">' + r[i].origin + '</span>';
 		html += '</div>';
-		html += '<div class="price-sale">$'+r[i].salePrice+'</div>';
+		html += '<div class="price-sale">$' + r[i].salePrice + '</div>';
 		html += '</div>';
 		html += '</div>';
-		$slide = $(html).appendTo(".navi-new .slide-container");
-		if(Number(r[i].star) > 0) $slide.find(".star > i").addClass("active");
+		$slide = $(html).appendTo(".navi-new .swiper-wrapper");
+		if (Number(r[i].star) > 0) $slide.find(".star > i").addClass("active");
 		$slide.find(".mask").css("left", r[i].star * 20 + "%");
 	}
+	var swiper = new Swiper('#newSlide .swiper-container', {
+		slidesPerView: 4,
+		loop: true,
+		navigation :{
+			nextEl: '#newSlide .bt-next',
+			prevEl: '#newSlide .bt-prev',
+		},
+	});
 }
 
 function onLangChg() {
-  $('.trans-wrapper').stop().slideToggle(200);
-  $('.trans-wrapper .lang-sel').stop().slideUp(200);
+	$('.trans-wrapper').stop().slideToggle(200);
+	$('.trans-wrapper .lang-sel').stop().slideUp(200);
 };
 
 function onLangSel() {
-  $('.trans-wrapper .lang-sel').stop().slideUp(200);
-  if ($(this).next().css('display') === 'none') $(this).next().stop().slideDown(200)
+	$('.trans-wrapper .lang-sel').stop().slideUp(200);
+	if ($(this).next().css('display') === 'none') $(this).next().stop().slideDown(200)
 }
