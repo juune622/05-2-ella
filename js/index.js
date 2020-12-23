@@ -262,15 +262,15 @@ function onNaviBest(r) {
 function onNaviSales(r) {
 	navi[5] = r;
 	$(".navi.navi-sales").prepend(createNavi(r));
-	for(var i=0; i<r.brands.length; i++) {
+	for(var i=0; i<r.depth2.length; i++) {
 		html  = '<div class="brand-wrap">';
-		html += '<div class="img-wrap" style="background-image: url('+r.brands[i].src+'); order: '+i%2+'">';
+		html += '<div class="img-wrap" style="background-image: url('+r.depth2[i].src+'); order: '+i%2+'">';
 		html += '</div>';
 		html += '<ul class="brand-link">';
-		html += '<li class="sub-navi bold">'+r.brands[i].company+'</li>';
-		for(var j=0; j<r.brands[i].brand.length; j++) {
+		html += '<li class="sub-navi bold">'+r.depth2[i].name+'</li>';
+		for(var j=0; j<r.depth2[i].depth3.length; j++) {
 			html += '<li class="sub-navi hover-line">';
-			html += '<a href="'+r.brands[i].brand[j].link+'">'+r.brands[i].brand[j].name+'</a>';
+			html += '<a href="'+r.depth2[i].depth3[j].link+'">'+r.depth2[i].depth3[j].name+'</a>';
 			html += '</li>';
 		}
 		html += '</ul>';
