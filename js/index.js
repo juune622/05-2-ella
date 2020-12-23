@@ -18,8 +18,8 @@ function mainBanner() {
 }
 
 function createNavi(r) {
-	var html  = '<a href="'+r.link+'" class="hover-line">';
-	if(r.icon) html += '<i class="'+r.icon+'"></i> ';
+	var html = '<a href="' + r.link + '" class="hover-line">';
+	if (r.icon) html += '<i class="' + r.icon + '"></i> ';
 	html += r.name;
 	html += '</a>';
 	return html;
@@ -27,12 +27,12 @@ function createNavi(r) {
 
 function createSub(r) {
 	var html = '<div class="sub-navi-wrap">';
-	for(var i=0; i<r.depth2.length; i++) {
-		if(r.depth2[i].depth3 && i > 0) html += '</div><div class="sub-navi-wrap">';
-		html += '<a href="'+r.depth2[i].link+'" class="sub-navi bold">'+r.depth2[i].name+'</a>';
-		if(r.depth2[i].depth3) {
-			for(var j=0; j<r.depth2[i].depth3.length; j++) {
-				html += '<a href="'+r.depth2[i].depth3[j].link+'" class="sub-navi hover-line">'+r.depth2[i].depth3[j].name+'</a>';
+	for (var i = 0; i < r.depth2.length; i++) {
+		if (r.depth2[i].depth3 && i > 0) html += '</div><div class="sub-navi-wrap">';
+		html += '<a href="' + r.depth2[i].link + '" class="sub-navi bold">' + r.depth2[i].name + '</a>';
+		if (r.depth2[i].depth3) {
+			for (var j = 0; j < r.depth2[i].depth3.length; j++) {
+				html += '<a href="' + r.depth2[i].depth3[j].link + '" class="sub-navi hover-line">' + r.depth2[i].depth3[j].name + '</a>';
 			}
 		}
 	}
@@ -41,14 +41,14 @@ function createSub(r) {
 }
 
 function createSub2(r) {
-	for(var i=0, html=''; i<r.depth2.length; i++) {
+	for (var i = 0, html = ''; i < r.depth2.length; i++) {
 		html += '<li class="depth depth2">';
-		html += '	<a href="'+r.depth2[i].link+'">'+r.depth2[i].name+'</a>';
-		if(r.depth2[i].depth3 && r.depth2[i].depth3.length > 0) {
+		html += '	<a href="' + r.depth2[i].link + '">' + r.depth2[i].name + '</a>';
+		if (r.depth2[i].depth3 && r.depth2[i].depth3.length > 0) {
 			html += '<ul>';
-			for(var j=0; j<r.depth2[i].depth3.length; j++) {
+			for (var j = 0; j < r.depth2[i].depth3.length; j++) {
 				html += '<li class="depth depth3">';
-				html += '	<a href="'+r.depth2[i].depth3[j].link+'">'+r.depth2[i].depth3[j].name+'</a>';
+				html += '	<a href="' + r.depth2[i].depth3[j].link + '">' + r.depth2[i].depth3[j].name + '</a>';
 				html += '</li>';
 			}
 			html += '</ul>';
@@ -68,27 +68,33 @@ function createSubNavi(el, r) {
 }
 
 function naviShowHide() {
-	if(winWidth >= 1199) { // PC
-		if(scTop >= topHeight + logoHeight){
-			$(".navi-wrapper").css({"position": "fixed"});
+	if (winWidth >= 1199) { // PC
+		if (scTop >= topHeight + logoHeight) {
+			$(".navi-wrapper").css({
+				"position": "fixed"
+			});
 			$(".navi-wrapper > .wrapper").css("max-width", "100%");
 			$(".navi-wrapper .navi-logo").css("display", "block");
 			$(".navi-wrapper .bt-login").css("display", "block");
-		}
-		else {
+		} else {
 			$(".navi-wrapper").css("position", "relative");
 			$(".navi-wrapper > .wrapper").css("max-width", "1200px");
 			$(".navi-wrapper .navi-logo").css("display", "none");
 			$(".navi-wrapper .bt-login").css("display", "none");
 		}
-		$(".logo-wrapper").css({"position": "relative"});
-	}
-	else { // Mobile
-		if(scTop >= topHeight)
-			$(".logo-wrapper").css({"position": "fixed"});
+		$(".logo-wrapper").css({
+			"position": "relative"
+		});
+	} else { // Mobile
+		if (scTop >= topHeight)
+			$(".logo-wrapper").css({
+				"position": "fixed"
+			});
 		else
 			$(".logo-wrapper").css("position", "relative");
-		$(".navi-wrapper").css({"position": "relative"});
+		$(".navi-wrapper").css({
+			"position": "relative"
+		});
 	}
 }
 
@@ -96,7 +102,7 @@ function createMoNavi() {
 	console.log(navi);
 	var html = '';
 	html += '<div class="top-wrap">';
-	html += '	<div class="close-wrap3 bt-close">';
+	html += '	<div class="close-wrap3 bt-close" onclick="onModalHide()">';
 	html += '		<i class="fa fa-times"></i>';
 	html += '	</div>';
 	html += '	<div class="tel-wrap">Available 24/7 at <strong>(018) 900-6690</strong></div>';
@@ -109,48 +115,85 @@ function createMoNavi() {
 		html += '</li>';
 	}
 	html += '</ul>';
-	$(".modal-navi").find('.depth1').html(html);
+	$(".modal-navi").find('.depth1').html(html)
+	$(".modal-navi").find('.depth1').append($(".trans-wrapper").clone().attr("style", "")).find('.trans-bg').remove();
+	$(".modal-navi").find('.depth1').find('.trans-wrapper .bt-down').click(onLangSel);
+
+
+	$(".modal-navi .depth2, .modal-navi .depth3").removeClass('active');
 }
 
 function createDepth2(idx) {
 	html  = '<div class="top-wrap">';
-	html += '	<div class="close-wrap3 bt-prev">';
+	html += '	<div class="close-wrap3 bt-prev" onclick="closeDepth(2)">';
 	html += '		<i class="fa fa-angle-left"></i>';
 	html += '	</div>';
 	html += '	<h4 class="title">'+navi[idx].name+'</h4>';
 	html += '</div>';
 	html += '<ul>';
 	for(var i=0; i<navi[idx].depth2.length; i++) {
-		html += '<li onclick="createDepth3('+idx+', '+i+');">';
-		html += '<a href="#">'+navi[idx].depth2[i].name+'</a>';
-		html += '<i class="fa fa-angle-right"></i>';
-		html += '</li>';
+		if(navi[idx].depth2[i].depth3 && navi[idx].depth2[i].depth3.length > 0) {
+			html += '<li onclick="createDepth3('+idx+', '+i+');">';
+			html += '<a href="#">'+navi[idx].depth2[i].name+'</a>';
+			html += '<i class="fa fa-angle-right"></i>';
+			html += '</li>';
+		}
+		else {
+			html += '<li>';
+			html += '<a href="#">'+navi[idx].depth2[i].name+'</a>';
+			html += '</li>';
+		}
 	}
 	html += '</ul>';
 	$(".modal-navi .depth2").html(html);
 	$(".modal-navi .depth2").addClass("active")
 }
 
+function createDepth3(idx, idx2) {
+	html  = '<div class="top-wrap">';
+	html += '	<div class="close-wrap3 bt-prev" onclick="closeDepth(3)">';
+	html += '		<i class="fa fa-angle-left"></i>';
+	html += '	</div>';
+	html += '	<h4 class="title">'+navi[idx].depth2[idx2].name+'</h4>';
+	html += '</div>';
+	html += '<ul>';
+	for(var i=0; i<navi[idx].depth2[idx2].depth3.length; i++) {
+		html += '<li>';
+		html += '<a href="#">'+navi[idx].depth2[idx2].depth3[i].name+'</a>';
+		html += '</li>';
+	}
+	html += '</ul>';
+	$(".modal-navi .depth3").html(html);
+	$(".modal-navi .depth3").addClass("active");
+}
 
+function closeDepth(n) {
+	$(".modal-navi .depth"+n).removeClass("active");
+}
 
 /********* 이벤트선언 **********/
-mainBanner();	// 배너세팅
-$(window).scroll(onScroll).resize(onResize).trigger("resize");
+mainBanner(); // 배너세팅
+
+$(window).scroll(onScroll);
+$(window).resize(onResize).trigger("resize");
 
 $('.top-wrapper .icon-down').click(onLangChg); // 언어선택
-$('.top-wrapper .bt-down').click(onLangSel); // 언어선택
+$('.trans-wrapper .bt-down').click(onLangSel); // 언어선택
+$('.trans-wrapper .trans-bg').click(onTransBg); // trans창 닫기
+$('.trans-wrapper .lang').click(onLangClick); // trans창 닫기
 
-$.get('../json/navi-new.json', onNaviNew);	// new release 생성
-$.get('../json/navi-best.json', onNaviBest);	// best sellers 생성
+$.get('../json/navi-new.json', onNaviNew); // new release 생성
+$.get('../json/navi-best.json', onNaviBest); // best sellers 생성
 $.get('../json/navi-sales.json', onNaviSales); // sales 생성
 $.get('../json/navi-men.json', onNaviMen); // Men 상품 가져오기
 $.get('../json/navi-women.json', onNaviWomen); // Women 상품 가져오기
 $.get('../json/navi-kids.json', onNaviKids); // Kids 상품 가져오기
 
 $.get('../json/new-products.json', onNewProducts); // new releases 상품 가져오기
+$.get('../json/looking.json', onLooking);
 
-$(".navi-wrapper .navi").mouseenter(onNaviEnter);	// 메인네비
-$(".navi-wrapper .navi").mouseleave(onNaviLeave);	// 메인네비
+$(".navi-wrapper .navi").mouseenter(onNaviEnter); // 메인네비
+$(".navi-wrapper .navi").mouseleave(onNaviLeave); // 메인네비
 
 $(".modal-trigger").click(onModalShow);
 $(".modal-container").click(onModalHide);
@@ -161,27 +204,37 @@ $('.modal-wrapper').find(".bt-close").click(onModalHide);
 
 
 
+
 /********* 이벤트콜백 **********/
+function onTransBg(e) {
+	e.stopPropagation();
+	onLangChg();
+}
+
 function onModalWrapperClick(e) {
 	e.stopPropagation();
 }
 
 function onModalShow(e) {
-	e.preventDefault();	// 기본이벤트 a니까 href의 기능(기본기능)을 막는다.
-	$(".modal-container").css({"display": "block"});
+	e.preventDefault(); // 기본이벤트 a니까 href의 기능(기본기능)을 막는다.
+	$(".modal-container").css({
+		"display": "block"
+	});
 	$(".modal-container").css("opacity");
 	$(".modal-container").addClass('active');
 	$("body").addClass("hide");
 	$($(this).data('modal')).addClass("active");
-	if($(this).data('modal') === '.modal-navi') createMoNavi();
+	if ($(this).data('modal') === '.modal-navi') createMoNavi();
 }
 
 
 function onModalHide(e) {
 	$(".modal-container").removeClass('active');
 	$('.modal-wrapper').removeClass("active");
-	setTimeout(function(){
-		$(".modal-container").css({"display": "none"});
+	setTimeout(function () {
+		$(".modal-container").css({
+			"display": "none"
+		});
 		$("body").removeClass("hide");
 	}, 300);
 }
@@ -250,11 +303,11 @@ function onNaviBest(r) {
 	navi[1] = r;
 	$(".navi.navi-best").prepend(createNavi(r));
 	$(".navi.navi-best").find('.sub-navi-wrapper').append(createSub(r));
-	for(var i=0; i<r.alphabet.length; i++) {
-		if(r.alphabet[i].class == '')
-			html = '<li><a>'+r.alphabet[i].name+'</a></li>';
-		else 
-			html = '<li><a href="#" class="active">'+r.alphabet[i].name+'</a></li>';
+	for (var i = 0; i < r.alphabet.length; i++) {
+		if (r.alphabet[i].class == '')
+			html = '<li><a>' + r.alphabet[i].name + '</a></li>';
+		else
+			html = '<li><a href="#" class="active">' + r.alphabet[i].name + '</a></li>';
 		$(".navi.navi-best").find('.alphabet-wrap').append(html);
 	}
 }
@@ -262,15 +315,15 @@ function onNaviBest(r) {
 function onNaviSales(r) {
 	navi[5] = r;
 	$(".navi.navi-sales").prepend(createNavi(r));
-	for(var i=0; i<r.depth2.length; i++) {
-		html  = '<div class="brand-wrap">';
-		html += '<div class="img-wrap" style="background-image: url('+r.depth2[i].src+'); order: '+i%2+'">';
+	for (var i = 0; i < r.depth2.length; i++) {
+		html = '<div class="brand-wrap">';
+		html += '<div class="img-wrap" style="background-image: url(' + r.depth2[i].src + '); order: ' + i % 2 + '">';
 		html += '</div>';
 		html += '<ul class="brand-link">';
-		html += '<li class="sub-navi bold">'+r.depth2[i].name+'</li>';
-		for(var j=0; j<r.depth2[i].depth3.length; j++) {
+		html += '<li class="sub-navi bold">' + r.depth2[i].name + '</li>';
+		for (var j = 0; j < r.depth2[i].depth3.length; j++) {
 			html += '<li class="sub-navi hover-line">';
-			html += '<a href="'+r.depth2[i].depth3[j].link+'">'+r.depth2[i].depth3[j].name+'</a>';
+			html += '<a href="' + r.depth2[i].depth3[j].link + '">' + r.depth2[i].depth3[j].name + '</a>';
 			html += '</li>';
 		}
 		html += '</ul>';
@@ -280,30 +333,31 @@ function onNaviSales(r) {
 }
 
 function onNewProducts(r) {
-	for(var i=0, html='', $slide; i<r.length; i++) {
-		html  = '<div class="slide swiper-slide">';
+	for (var i = 0, html = '', $slide; i < r.length; i++) {
+		html = '<div class="slide swiper-slide">';
 		html += '<div class="img-wrap">';
-		html += '<img src="'+r[i].src+'" alt="상품" class="w-100">';
+		html += '<img src="' + r[i].src + '" alt="상품" class="w-100">';
 		html += '</div>';
 		html += '<div class="content-wrap">';
-		html += '<h4 class="title">'+r[i].title+'</h4>';
-		html += '<p class="summary">'+r[i].summary+'</p>';
+		html += '<h4 class="title">' + r[i].title + '</h4>';
+		html += '<p class="summary">' + r[i].summary + '</p>';
 		html += '<div class="star">';
-		for(var j=0; j<5; j++) html += '<i class="fa fa-star"></i>';
-		if(Number(r[i].star) > 0) html += '<div class="mask"></div>';
+		for (var j = 0; j < 5; j++) html += '<i class="fa fa-star"></i>';
+		if (Number(r[i].star) > 0) html += '<div class="mask"></div>';
 		html += '</div>';
 		html += '<div class="content">';
-		html += '<span class="price-original">$'+r[i].originalPrice+'</span>';
+		html += '<span class="price-original">$' + r[i].originalPrice + '</span>';
 		html += '<span> | </span>';
-		html += '<span class="origin">'+r[i].origin+'</span>';
+		html += '<span class="origin">' + r[i].origin + '</span>';
 		html += '</div>';
-		html += '<div class="price-sale">$'+r[i].salePrice+'</div>';
+		html += '<div class="price-sale">$' + r[i].salePrice + '</div>';
 		html += '</div>';
 		html += '</div>';
 		$slide = $(html).appendTo(".navi-new .swiper-wrapper");
-		if(Number(r[i].star) > 0) $slide.find(".star > i").addClass("active");
+		if (Number(r[i].star) > 0) $slide.find(".star > i").addClass("active");
 		$slide.find(".mask").css("left", r[i].star * 20 + "%");
 	}
+
 	var swiper = new Swiper('#newSlide .swiper-container', {
 		slidesPerView: 4,
 		loop: true,
@@ -316,11 +370,36 @@ function onNewProducts(r) {
 		},
 	});
 }
+
+function onLooking(r) {
+	for (var i = 0, html = ''; i < r.length; i++) {
+		html += '<li class="spot">'
+		html += '<a href="' + r[i].link + '">'
+		html += '<img src="' + r[i].src + '" alt="spot-img"class="w-100 animate__animated">'
+		html += '<h3 class="title hover-line">' + r[i].title + '</h3>'
+		html += '</a>'
+		html += '</li>'
+	}
+	$(".looking-wrapper .spot-wrapper").append(html);
+}
+
 function onLangChg() {
 	$(".trans-wrapper").stop().slideToggle(200);
 	$(".trans-wrapper .lang-sel").stop().slideUp(200);
 }
+
 function onLangSel() {
 	$(".trans-wrapper .lang-sel").stop().slideUp(200);
-	if($(this).next().css("display") === 'none') $(this).next().stop().slideDown(200);
+	if ($(this).next().css("display") === 'none') $(this).next().stop().slideDown(200);
+}
+
+function onLangClick() {
+	var $container = $(this).parent().parent().parent();
+	var lang = $(this).text();
+	var bg = $(this).prev().css("background-image");
+	$container.find('.lang').removeClass('active');
+	$(this).addClass('active');
+	$container.find('.flag-now').css("background-image", bg);
+	$container.find('.lang-now').text(lang);
+	$(this).parent().parent().stop().slideUp(200);
 }
