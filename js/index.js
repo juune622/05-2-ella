@@ -2,6 +2,10 @@
 var scTop, topHeight, logoHeight, winWidth, navi = [];
 
 /********* 사용자함수 **********/
+function chgImg(el, src){
+	$(el).parents('.prd').find('.img-front').attr('src',src)
+	$(el).parent().addClass('active').siblings().removeClass('active')
+}
 
 function renderStar(){
 	$(".star").each(function(i){
@@ -210,7 +214,8 @@ $('.modal-wrapper').click(onModalWrapperClick);
 $('.modal-wrapper').find(".bt-close").click(onModalHide);
 
 
-renderStar($(".best-wrapper"))
+renderStar()
+
 
 
 
