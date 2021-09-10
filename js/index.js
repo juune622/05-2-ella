@@ -2,9 +2,26 @@
 var scTop, topHeight, logoHeight, winWidth, navi = [];
 
 /********* 사용자함수 **********/
+
+function renderPrd(){
+	$('.prd').each(function(i){
+		var discount = $(this).data('discount')
+		var icon = $(this).data('icon')
+		var html=''
+		if(discount) {
+			$(this).find('.icon-wrap').append('<div class="discount">'+discount+'</div>');
+		}
+		if(icon && icon.length>0){
+			for(var i=0,html='';i<icon.length;i++){
+				html +='<div class="icon" style="background-color:'+icon[i].bg+';">'+icon[i].title+'</div>';
+			}
+		}
+		$(this).find('.icon-wrap').append(html);
+	});
+}
 function chgImg(el, src){
 	$(el).parents('.prd').find('.img-front').attr('src',src)
-	$(el).parent().addClass('active').siblings().removeClass('active')
+	$(el).parents('.choice').addClass('active').siblings().removeClass('active')
 }
 
 function renderStar(){
@@ -214,8 +231,8 @@ $('.modal-wrapper').click(onModalWrapperClick);
 $('.modal-wrapper').find(".bt-close").click(onModalHide);
 
 
-renderStar()
-
+renderStar();
+renderPrd();
 
 
 
