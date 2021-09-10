@@ -3,25 +3,25 @@ var scTop, topHeight, logoHeight, winWidth, navi = [];
 
 /********* 사용자함수 **********/
 
-function renderPrd(){
+function renderPrd() {
 	$('.prd').each(function(i){
-		var discount = $(this).data('discount')
-		var icon = $(this).data('icon')
-		var html=''
+		var discount = $(this).data('discount');
+		var icon = $(this).data('icon');
+		$(this).find('.icon-wrap').empty();
 		if(discount) {
 			$(this).find('.icon-wrap').append('<div class="discount">'+discount+'</div>');
 		}
-		if(icon && icon.length>0){
-			for(var i=0,html='';i<icon.length;i++){
-				html +='<div class="icon" style="background-color:'+icon[i].bg+';">'+icon[i].title+'</div>';
+		if(icon && icon.length > 0) {
+			for(var i=0, html=''; i<icon.length; i++) {
+				html += '<div class="icon" style="background-color: '+icon[i].bg+';">'+icon[i].title+'</div>';
 			}
+			$(this).find('.icon-wrap').append(html);
 		}
-		$(this).find('.icon-wrap').append(html);
 	});
 }
-function chgImg(el, src){
-	$(el).parents('.prd').find('.img-front').attr('src',src)
-	$(el).parents('.choice').addClass('active').siblings().removeClass('active')
+function chgImg(el, src) {
+	$(el).parents('.prd').find('.img-front').attr('src', src);
+	$(el).parent().addClass('active').siblings().removeClass('active');
 }
 
 function renderStar(){
@@ -294,6 +294,14 @@ function onPrd(r) {
 	}
 	renderStar();	// star
 	renderPrd();	// discount
+	var swiper = new Swiper('.prd-wrapper.swiper-container',{
+		slidesPerView: 4,
+		loop: true,
+		navigation: {
+			nextEl: '.prd-wrapper .bt-next',
+			prevEl: '.prd-wrapper .bt-prev'
+		},
+	})
 }
 
 
