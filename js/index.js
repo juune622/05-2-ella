@@ -243,57 +243,60 @@ renderPrd();
 
 /********* 이벤트콜백 **********/
 
-function onPrd(r){
-	for(var i =0,html='';i < r.length;i++){
-		html += '<li class="prd" data-discount="-11%" data-icon='[{"title" : "NEW","bg" : "#293356"},{"title" : "BUNDLE","bg" : "#333"}]'>'
-		html += '<div class="icon-wrap"></div>'
-		html += '<div class="quick-wrap">'
-		html += '<i class="fa fa-eye"></i>'
-		html += '<span>Quick View</span>'
-		html += '</div>'
-		html += '<div class="img-wrap">'
-		html += '<img src="../img/pick1.jpg" alt="사진" class="w-100 img-front">'
-		html += '<img src="../img/pick2.jpg" alt="사진" class="w-100">'
-		html += '<a href="#" class="bt-white">ADD CART</a>'
-		html += '</div>'
-		html += '<div class="title-wrap">'
-		html += '<div class="title">MARC</div> '
-		html += '<i class="bt-like far fa-heart" onclick="$(this).addClass('fa').removeClass('far')"></i>'
-		html += '</div>'
-		html += '<ul class="choice-wrap">'
-		html += '<li class="choice active">'
-		html += '<div><img src="../img/image (12).jpg" alt="thumb" class="w-100" onclick="chgImg(this, '../img/pic1.jpg');"></div>'
-		html += '<div class="popper"><span>White</span></div>'
-		html += '</li>'
-		html += '<li class="choice">'
-		html += '<div><img src="../img/image (11).jpg" alt="thumb" class="w-100" onclick="chgImg(this, '../img/pic7.jpg');"></div>'
-		html += '<div class="popper"><sapn>Blue</span></div>'
-		html += '</li>'
-		html += '<li class="choice">'
-		html += '<div><img src="../img/image (10).jpg" alt="thumb" class="w-100" onclick="chgImg(this, '../img/pic5.jpg');"></div>'
-		html += '<div class="popper"><sapn>Orange</span></div>'
-		html += '</li>'
-		html += '</ul>'
-		html += '<div class="content-wrap ">'
-		html += '<span class="content hover-line">Dinterdum pretium de condimentus</span>'
-		html += '<span> - </span>'
-		html += '<span class="color hover-line">White</span>'
-		html += '</div>'
-		html += '<div class="price-wrap">$189.00</div>'
-		html += '<div class="star-wrap">'
-		html += '<div class="star" data-score="4.6">'
-		html += '<i class="fa fa-star"></i>'
-		html += '<i class="fa fa-star"></i>'
-		html += '<i class="fa fa-star"></i>'
-		html += '<i class="fa fa-star"></i>'
-		html += '<i class="fa fa-star"></i>'
-		html += '<div class="mask"></div>'
-		html += '</div>'
-		html += '<a href="#" class="bt-more">MORE SIZES AVAIABLE</a>'
-		html += '</div>'
-		html += '</li>'
+function onPrd(r) {
+	for(var i=0, html=''; i<r.length; i++) {
+		html  = '<li class="prd swiper-slide" '; 
+		html += 'data-discount="'+(r[i].discount || '')+'" ';
+		html += 'data-icon=\'[';
+		if(r[i].icon && r[i].icon.length > 0) {
+			for(var j=0; j<r[i].icon.length; j++) {
+				html += '{"title": "'+r[i].icon[j].title+'", "bg": "'+r[i].icon[j].bg+'"},';
+			}
+			html = html.slice(0, -1);
+		}
+		html += ']\'>';
+		html += '<div class="icon-wrap"></div>';
+		html += '<div class="quick-wrap">';
+		html += '<i class="fa fa-eye"></i>';
+		html += '<span>Quick View</span>';
+		html += '</div>';
+		html += '<div class="img-wrap">';
+		html += '<img src="'+r[i].imgFront[0].big+'" alt="사진" class="w-100 img-front">';
+		html += '<img src="'+r[i].imgBack+'" alt="사진" class="w-100">';
+		html += '<a href="#" class="bt-white">ADD CART</a>';
+		html += '</div>';
+		html += '<div class="title-wrap">';
+		html += '<div class="title">'+r[i].title+'</div>';
+		html += '<i class="bt-like far fa-heart" onclick="$(this).addClass(\'fa\').removeClass(\'far\');"></i>';
+		html += '</div>';
+		html += '<ul class="choice-wrap">';
+		for(var j=0; j<r[i].imgFront.length; j++) {
+			html += '<li class="choice '+(j==0 ? 'active': '')+'">';
+			html += '<img src="'+r[i].imgFront[j].thumb+'" alt="thumb" class="w-100" onclick="chgImg(this, \''+r[i].imgFront[j].big+'\');">';
+			html += '</li>';
+		}
+		html += '</ul>';
+		html += '<div class="content-wrap">';
+		html += '<span class="content hover-line">'+r[i].content+'</span>';
+		html += '<span> - </span>';
+		html += '<span class="color hover-line">'+r[i].color+'</span>';
+		html += '</div>';
+		html += '<div class="price-wrap">'+r[i].price+'</div>';
+		html += '<div class="star-wrap">';
+		html += '<div class="star" data-score="'+r[i].star+'">';
+		for(var j=0; j<5; j++) html += '<i class="fa fa-star"></i>';
+		html += '<div class="mask"></div>';
+		html += '</div>';
+		html += '<a href="'+r[i].link+'" class="bt-more">MORE SIZES ABAILABLE</a>';
+		html += '</div>';
+		html += '</li>';
+		$('.prd-wrap').append(html);
 	}
+	renderStar();	// star
+	renderPrd();	// discount
 }
+
+
 
 function onTransBg(e) {
 	e.stopPropagation();
