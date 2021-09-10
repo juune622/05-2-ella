@@ -261,9 +261,26 @@ h2.title-main {font-family: 'DM Serif Display', serif; font-size: 2.5em; letter-
 .brand-wrap .brand img{transition: all 1s;}
 .brand-wrap .brand:hover img{transform: scale(1.1);opacity: 0.7;}
 
+/************ collection-wrapper *************/
+.collection-wrapper {padding: 4em 0; display: flex; align-items: center; flex-wrap: wrap;}
+.collection-wrapper > .title-wrap {flex: 25% 0 0; padding: 0 2%;}
+.collection-wrapper > .collection-wrap {flex: 75% 0 0; position: relative;}
+.collection-wrapper > .collection-wrap .swiper-slide {padding: 0 1%;}
+.collection-wrapper .bt {font-size: 4em; color: #f9f9f9; text-shadow: 0 0 0.25em rgba(0,0,0,0.5); position: absolute; top: 50%; transform: translateY(-50%); z-index: 6; cursor: pointer;}
+.collection-wrap .bt-prev {left: 0;}
+.collection-wrap .bt-next {right: 0;}
 
+/************ n-wrapper *************/
+/* #e0e2ea #efe8e0*/
 
-
+.etc-wrapper{display: flex;flex-wrap: wrap;text-align: center;}
+.etc-wrapper >div{flex:50% 0 0;padding: 5% 10%;}
+.etc-wrapper >.tailor-wrap{background-color: #e0e2ea;}
+.etc-wrapper >.chat-wrap{background-color: #efe8e0;}
+.etc-wrapper .title {font-family: 'DM Serif Display', serif;font-size: 1.75em;margin: 1em 0;}
+.etc-wrapper .content {margin: 1.5em 0 3em 0;line-height: 1.75;}
+.etc-wrapper .hover-line {color: #ba7a2d;font-weight: bold;}
+.etc-wrapper .hover-line::after {border-color: #ba7a2d;}
 
 
 /************ 모달 *************/
@@ -320,7 +337,8 @@ h2.title-main {font-family: 'DM Serif Display', serif; font-size: 2.5em; letter-
 }
 
 @media screen and (max-width: 991px) {
-
+	.collection-wrapper > .title-wrap {flex: 100% 0 0; text-align: center; margin-bottom: 3em;}
+	.collection-wrapper > .collection-wrap {flex: 100% 0 0;}
 }
 
 @media screen and (max-width: 767px) {
@@ -331,6 +349,7 @@ h2.title-main {font-family: 'DM Serif Display', serif; font-size: 2.5em; letter-
 	.featured-wrap > img{max-height: auto;max-width: 100%;}
 	.featured-wrap .banner-wrap{position: static; width: 90%;margin: auto;transform: translateY(-40%);}
 	.featured-wrap .prd{width: 92%;position:relative;top: 2%;max-width: 320px;margin: auto;margin-top: -10%;}
+	.etc-wrapper >div{flex:100% 0 0;padding: 10%;}
 }
 
 @media screen and (max-width: 575px) {

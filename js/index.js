@@ -3,6 +3,59 @@ var scTop, topHeight, logoHeight, winWidth, navi = [];
 
 /********* 사용자함수 **********/
 
+function createPrd(r, el){
+	for(var i=0, html=''; i<r.length; i++) {
+		html  = '<li class="prd swiper-slide" '; 
+		html += 'data-discount="'+(r[i].discount || '')+'" ';
+		html += 'data-icon=\'[';
+		if(r[i].icon && r[i].icon.length > 0) {
+			for(var j=0; j<r[i].icon.length; j++) {
+				html += '{"title": "'+r[i].icon[j].title+'", "bg": "'+r[i].icon[j].bg+'"},';
+			}
+			html = html.slice(0, -1);
+		}
+		html += ']\'>';
+		html += '<div class="icon-wrap"></div>';
+		html += '<div class="quick-wrap">';
+		html += '<i class="fa fa-eye"></i>';
+		html += '<span>Quick View</span>';
+		html += '</div>';
+		html += '<div class="img-wrap">';
+		html += '<img src="'+r[i].imgFront[0].big+'" alt="사진" class="w-100 img-front">';
+		html += '<img src="'+r[i].imgBack+'" alt="사진" class="w-100">';
+		html += '<a href="#" class="bt-white">ADD CART</a>';
+		html += '</div>';
+		html += '<div class="title-wrap">';
+		html += '<div class="title">'+r[i].title+'</div>';
+		html += '<i class="bt-like far fa-heart" onclick="$(this).addClass(\'fa\').removeClass(\'far\');"></i>';
+		html += '</div>';
+		html += '<ul class="choice-wrap">';
+		for(var j=0; j<r[i].imgFront.length; j++) {
+			html += '<li class="choice '+(j==0 ? 'active': '')+'">';
+			html += '<img src="'+r[i].imgFront[j].thumb+'" alt="thumb" class="w-100" onclick="chgImg(this, \''+r[i].imgFront[j].big+'\');">';
+			html += '</li>';
+		}
+		html += '</ul>';
+		html += '<div class="content-wrap">';
+		html += '<span class="content hover-line">'+r[i].content+'</span>';
+		html += '<span> - </span>';
+		html += '<span class="color hover-line">'+r[i].color+'</span>';
+		html += '</div>';
+		html += '<div class="price-wrap">'+r[i].price+'</div>';
+		html += '<div class="star-wrap">';
+		html += '<div class="star" data-score="'+r[i].star+'">';
+		for(var j=0; j<5; j++) html += '<i class="fa fa-star"></i>';
+		html += '<div class="mask"></div>';
+		html += '</div>';
+		html += '<a href="'+r[i].link+'" class="bt-more">MORE SIZES ABAILABLE</a>';
+		html += '</div>';
+		html += '</li>';
+		$(el).append(html);
+	}
+	renderStar();	// star
+	renderPrd();	// discount
+}
+
 function renderPrd() {
 	$('.prd').each(function(i){
 		var discount = $(this).data('discount');
@@ -223,6 +276,7 @@ $.get('../json/new-products.json', onNewProducts); // new releases 상품 가져
 $.get('../json/looking.json', onLooking);
 
 $.get('../json/prd.json',onPrd);//prd배너 생생
+$.get('../json/collection.json',onCollection);//collection배너 생생
 
 $(".navi-wrapper .navi").mouseenter(onNaviEnter); // 메인네비
 $(".navi-wrapper .navi").mouseleave(onNaviLeave); // 메인네비
@@ -243,57 +297,28 @@ renderPrd();
 
 /********* 이벤트콜백 **********/
 
-function onPrd(r) {
-	for(var i=0, html=''; i<r.length; i++) {
-		html  = '<li class="prd swiper-slide" '; 
-		html += 'data-discount="'+(r[i].discount || '')+'" ';
-		html += 'data-icon=\'[';
-		if(r[i].icon && r[i].icon.length > 0) {
-			for(var j=0; j<r[i].icon.length; j++) {
-				html += '{"title": "'+r[i].icon[j].title+'", "bg": "'+r[i].icon[j].bg+'"},';
+function onCollection(r) {
+	createPrd(r, '.collection-wrap .swiper-wrapper');
+	var swiper = new Swiper('.collection-wrap.swiper-container', {
+		slidesPerView: 1,
+		loop: true,
+		navigation: {
+			nextEl: '.collection-wrap .bt-next',
+			prevEl: '.collection-wrap .bt-prev',
+		},
+		breakpoints: {
+			576: {
+				slidesPerView: 2
+			},
+			768: {
+				slidesPerView: 3
 			}
-			html = html.slice(0, -1);
 		}
-		html += ']\'>';
-		html += '<div class="icon-wrap"></div>';
-		html += '<div class="quick-wrap">';
-		html += '<i class="fa fa-eye"></i>';
-		html += '<span>Quick View</span>';
-		html += '</div>';
-		html += '<div class="img-wrap">';
-		html += '<img src="'+r[i].imgFront[0].big+'" alt="사진" class="w-100 img-front">';
-		html += '<img src="'+r[i].imgBack+'" alt="사진" class="w-100">';
-		html += '<a href="#" class="bt-white">ADD CART</a>';
-		html += '</div>';
-		html += '<div class="title-wrap">';
-		html += '<div class="title">'+r[i].title+'</div>';
-		html += '<i class="bt-like far fa-heart" onclick="$(this).addClass(\'fa\').removeClass(\'far\');"></i>';
-		html += '</div>';
-		html += '<ul class="choice-wrap">';
-		for(var j=0; j<r[i].imgFront.length; j++) {
-			html += '<li class="choice '+(j==0 ? 'active': '')+'">';
-			html += '<img src="'+r[i].imgFront[j].thumb+'" alt="thumb" class="w-100" onclick="chgImg(this, \''+r[i].imgFront[j].big+'\');">';
-			html += '</li>';
-		}
-		html += '</ul>';
-		html += '<div class="content-wrap">';
-		html += '<span class="content hover-line">'+r[i].content+'</span>';
-		html += '<span> - </span>';
-		html += '<span class="color hover-line">'+r[i].color+'</span>';
-		html += '</div>';
-		html += '<div class="price-wrap">'+r[i].price+'</div>';
-		html += '<div class="star-wrap">';
-		html += '<div class="star" data-score="'+r[i].star+'">';
-		for(var j=0; j<5; j++) html += '<i class="fa fa-star"></i>';
-		html += '<div class="mask"></div>';
-		html += '</div>';
-		html += '<a href="'+r[i].link+'" class="bt-more">MORE SIZES ABAILABLE</a>';
-		html += '</div>';
-		html += '</li>';
-		$('.prd-wrap').append(html);
-	}
-	renderStar();	// star
-	renderPrd();	// discount
+	});
+}
+
+function onPrd(r) {
+	createPrd(r,'.prd-wrap')
 	var swiper = new Swiper('.prd-wrapper.swiper-container',{
 		slidesPerView: 1,
 		loop: true,
